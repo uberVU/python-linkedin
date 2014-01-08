@@ -368,6 +368,19 @@ class LinkedInApplication(object):
                 raise LinkedInError(response)
             return True
 
+    def submit_post_comment(self, post_id, text):
+        post = {'text': text}
+        url = '%s/%s/comments' % (ENDPOINTS.POSTS, str(post_id))
+        try:
+            response = self.make_request('POST', url, data=json.dumps(post))
+            response = response.json()
+        except (requests.ConnectionError, requests.HTTPError), error:
+            raise LinkedInHTTPError(error.message)
+        else:
+            if not self.request_succeeded(response):
+                raise LinkedInError(response)
+            return True
+
     def get_company_by_email_domain(self, email_domain, params=None, headers=None):
         url = '%s?email-domain=%s' % (ENDPOINTS.COMPANIES, email_domain)
         try:
