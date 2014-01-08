@@ -30,14 +30,14 @@ To connect to LinkedIn as a developer or just to access your own data, you don't
 ```python
 from linkedin import linkedin
 
-# Define CONSUMER_KEY, CONSUMER_SECRET,  
-# USER_TOKEN, and USER_SECRET from the credentials 
+# Define CONSUMER_KEY, CONSUMER_SECRET,
+# USER_TOKEN, and USER_SECRET from the credentials
 # provided in your LinkedIn application
 
 # Instantiate the developer authentication class
 
-authentication = linkedin.LinkedInDeveloperAuthentication(CONSUMER_KEY, CONSUMER_SECRET, 
-                                                          USER_TOKEN, USER_SECRET, 
+authentication = linkedin.LinkedInDeveloperAuthentication(CONSUMER_KEY, CONSUMER_SECRET,
+                                                          USER_TOKEN, USER_SECRET,
                                                           RETURN_URL, linkedin.PERMISSIONS.enums.values())
 
 # Pass it in to the app...
@@ -228,7 +228,7 @@ application.search_job(selectors=[{'jobs': ['id', 'customer-job-code', 'posting-
 ```
 
 ## Group API
-The Groups API provides rich access to read and interact with LinkedIn’s groups functionality. You can get more information from [here](http://developers.linkedin.com/documents/groups-api). By the help of the interface, you can fetch group details, get your group memberships as well as your posts for a specific group which you are a member of.
+The Groups API provides rich access to read and interact with LinkedIn’s groups functionality. You can get more information from [here](http://developers.linkedin.com/documents/groups-api). By the help of the interface, you can fetch group details, get your group memberships as well as your posts and comments for a specific group which you are a member of.
 
 ```python
 application.get_group(41001)
@@ -241,6 +241,24 @@ application.get_memberships(params={'count': 20})
    u'membershipState': {u'code': u'member'}}]}
 
 application.get_posts(41001)
+{u'_count': 1,
+ u'values': [{u'creator': {u'firstName': u'S\xe9no Herv\xe9',
+    u'headline': u'IT Consultant',
+    u'id': u'hxGV7xONpK3y3',
+    u'lastName': u'E.',
+   u'id': u'g-41001-S-5826385892398358528',
+   u'title': u'How to rename an application in Django 1.6',
+   u'type': {u'code': u'standard'}}}]}
+
+application.get_comments("g-41001-S-5826385892398358528")
+{u'_total': 1,
+ u'values': [{u'text': u'Good read, thanks!',
+    u'creationTimestamp': 1388449698000,
+    u'id': u'g-41001-S-5822362905940606976-5823580124875862016',
+    u'creator': {u'headline': u'Django/Python',
+       u'lastName': u'J.',
+       u'id': u'c7xfwXnpAKjgx',
+       u'firstName': u'John'}}]}
 ```
 
 You can also submit a new post into a specific group.
