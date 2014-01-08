@@ -366,7 +366,7 @@ class LinkedInApplication(object):
         else:
             if not self.request_succeeded(response):
                 raise LinkedInError(response)
-            return True
+            return response
 
     def submit_post_comment(self, post_id, text):
         post = {'text': text}
@@ -379,7 +379,7 @@ class LinkedInApplication(object):
         else:
             if not self.request_succeeded(response):
                 raise LinkedInError(response)
-            return True
+            return response
 
     def get_company_by_email_domain(self, email_domain, params=None, headers=None):
         url = '%s?email-domain=%s' % (ENDPOINTS.COMPANIES, email_domain)
