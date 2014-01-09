@@ -377,6 +377,18 @@ class LinkedInApplication(object):
                 raise LinkedInError(response)
             return response
 
+    def get_last_share(self):
+        url = '%s/~/current-share' % ENDPOINTS.PEOPLE
+        try:
+            response = self.make_request('GET', url)
+            response = response.json()
+        except (requests.ConnectionError, requests.HTTPError), error:
+            raise LinkedInHTTPError(error.message)
+        else:
+            if not self.request_succeeded(response):
+                raise LinkedInError(response)
+            return response
+
     def get_company_by_email_domain(self, email_domain, params=None, headers=None):
         url = '%s?email-domain=%s' % (ENDPOINTS.COMPANIES, email_domain)
         try:
