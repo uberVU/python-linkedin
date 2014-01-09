@@ -162,8 +162,7 @@ class LinkedInApplication(object):
 
         if params is None:
             params = {}
-        kw = dict(data=data, params=params,
-                  headers=headers, timeout=timeout)
+        kw = dict(data=data, params=params, headers=headers, timeout=timeout)
 
         if isinstance(self.authentication, LinkedInDeveloperAuthentication):
             # Let requests_oauthlib.OAuth1 do *all* of the work here
@@ -174,7 +173,6 @@ class LinkedInApplication(object):
             params.update({'oauth2_access_token': self.authentication.token.access_token})
 
         return requests.request(method.upper(), url, **kw)
-
 
     def get_profile(self, member_id=None, member_url=None, selectors=None,
                     params=None, headers=None):
@@ -360,7 +358,6 @@ class LinkedInApplication(object):
         url = '%s/%s/posts' % (ENDPOINTS.GROUPS, str(group_id))
         try:
             response = self.make_request('POST', url, data=json.dumps(post))
-            response = response.json()
         except (requests.ConnectionError, requests.HTTPError), error:
             raise LinkedInHTTPError(error.message)
         else:
@@ -373,7 +370,6 @@ class LinkedInApplication(object):
         url = '%s/%s/comments' % (ENDPOINTS.POSTS, str(post_id))
         try:
             response = self.make_request('POST', url, data=json.dumps(post))
-            response = response.json()
         except (requests.ConnectionError, requests.HTTPError), error:
             raise LinkedInHTTPError(error.message)
         else:
