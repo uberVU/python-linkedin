@@ -286,6 +286,21 @@ class LinkedInApplication(object):
                 raise LinkedInError(response)
             return response
 
+    def get_post(self, post_id, selectors=None):
+        url = '%s/%s' % (ENDPOINTS.POSTS, str(post_id))
+        if selectors:
+            url = '%s:(%s)' % (url, LinkedInSelector.parse(selectors))
+
+        try:
+            response = self.make_request('GET', url)
+            response = response.json()
+        except requests.ConnectionError as error:
+            raise LinkedInHTTPError(error.message)
+        else:
+            if not self.request_succeeded(response):
+                raise LinkedInError(response)
+            return response
+
     def get_posts(self, group_id, post_ids=None, selectors=None, params=None,
                   headers=None):
         url = '%s/%s/posts' % (ENDPOINTS.GROUPS, str(group_id))
