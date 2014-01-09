@@ -250,6 +250,13 @@ application.get_posts(41001)
    u'title': u'How to rename an application in Django 1.6',
    u'type': {u'code': u'standard'}}}]}
 
+application.get_post('g-41001-S-5826385892398358528')
+{'parentGroup': {'id': '6595504', 'name': 'Test Group XRE'},
+                 'title': 'How to rename an application in Django 1.6',
+                 'type': {'code': 'standard'},
+                 'id': 'g-41001-S-5826385892398358528',
+                 'creator': {'headline': 'IT Consultant', 'lastName': 'E.', 'id': 'hxGV7xONpK3y3', 'firstName': 'S\xe9no Herv\xe9'}}
+
 application.get_comments("g-41001-S-5826385892398358528")
 {u'_total': 1,
  u'values': [{u'text': u'Good read, thanks!',
@@ -272,6 +279,10 @@ content_title = 'New Scala Material'
 description = 'It is a great book for the keen beginners. Check it out!'
 
 application.submit_group_post(41001, title, summary, submitted_url, submitted_image_url, content_title, description)
+<Response [201]>
+
+application.submit_post_comment("g-41001-S-5826385892398358528", "Glad you liked it!")
+<Response [201]>
 ```
 
 ## Company API
@@ -367,6 +378,13 @@ Network updates serve as one of the core experiences on LinkedIn, giving users t
 application.submit_share('Posting from the API using JSON', 'A title for your share', None, 'http://www.linkedin.com', 'http://d.pr/3OWS')
 {'updateKey': u'UNIU-8219502-5705061301949063168-SHARE'
  'updateURL': 'http://www.linkedin.com/updates?discuss=&amp;scope=8219502&amp;stype=M&amp;topic=5705061301949063168&amp;type=U&amp;a=aovi'}
+
+application.get_last_share()
+{'comment': "Hi linkedin, it's 1389265505",
+ 'author': {'lastName': 'John', 'id': '2323SDFSsfd34', 'firstName': 'Ruby'},
+ 'timestamp': 1389265542000,
+ 'visibility': {'code': 'connections-only'},
+ 'id': 's5327992021491726735'}
 ```
 
 ## Network API
