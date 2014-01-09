@@ -364,11 +364,11 @@ class LinkedInApplication(object):
         post = {'title': title, 'summary': summary}
         if submitted_url:
             post['content']['submitted_url'] = submitted_url
-        if submitted_url:
+        if submitted_image_url:
             post['content']['submitted_image_url'] = submitted_image_url
-        if submitted_url:
+        if content_title:
             post['content']['content_title'] = content_title
-        if submitted_url:
+        if description:
             post['content']['description'] = description
 
         url = '%s/%s/posts' % (ENDPOINTS.GROUPS, str(group_id))
