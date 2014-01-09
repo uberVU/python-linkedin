@@ -361,15 +361,16 @@ class LinkedInApplication(object):
 
     def submit_group_post(self, group_id, title, summary, submitted_url,
                           submitted_image_url, content_title, description):
-        post = {
-            'title': title, 'summary': summary,
-            'content': {
-                'submitted-url': submitted_url,
-                'submitted-image-url': submitted_image_url,
-                'title': content_title,
-                'description': description
-            }
-        }
+        post = {'title': title, 'summary': summary}
+        if submitted_url:
+            post['content']['submitted_url'] = submitted_url
+        if submitted_url:
+            post['content']['submitted_image_url'] = submitted_image_url
+        if submitted_url:
+            post['content']['content_title'] = content_title
+        if submitted_url:
+            post['content']['description'] = description
+
         url = '%s/%s/posts' % (ENDPOINTS.GROUPS, str(group_id))
         try:
             response = self.make_request('POST', url, data=json.dumps(post))
